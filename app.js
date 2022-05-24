@@ -1,7 +1,6 @@
 require("dotenv").config();
 const express = require("express");
-const https = require("https"); // native node module
-
+const https = require("https");
 const app = express();
 
 app.get("/", function(req, res){
@@ -11,9 +10,6 @@ app.get("/", function(req, res){
 
     // Get data
     response.on("data", function(data) {
-      // console.log(weatherData);
-      // console.log(temp);
-      // console.log(description);
       const weatherData = JSON.parse(data) // convert hex data into JSON
       const weatherTemp = weatherData.main.temp // access the temp within weatherData object
       const weatherDescription = weatherData.weather[0].description // access the weather description
@@ -25,12 +21,7 @@ app.get("/", function(req, res){
       res.send()
     })
   })
-
-  // Send result back to client
-  //es.send("Server is up and running.")
 })
-
-// code...
 
 app.listen(process.env.PORT, function() {
   console.log("Server is running on port 3000.")
